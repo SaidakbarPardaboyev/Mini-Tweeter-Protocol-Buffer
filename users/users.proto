@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+option go_package = "genproto/users_service";
+
+package users_service;
+
+// Service definition for User
+service UserService {
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+    rpc GetUser(GetUserRequest) returns (User);
+    rpc GetUserWithLogin(GetUserWithUsernameRequest) returns (User);
+    rpc GetListUser(GetListUserRequest) returns (UserList);
+    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+    rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+}
+
+// User message
+message User {
+  string id            = 1;
+  string name          = 2;
+  string surname       = 3;
+  string bio           = 4;
+  string profile_image = 5;
+  string username      = 6;
+  string password_hash = 7;
+  string created_at    = 8;
+  string updated_at    = 9;
+}
+
+// Request message for CreateUser
+message CreateUserRequest {
+  User User = 1;
+}
+
+// Response message for CreateUser
+message CreateUserResponse {
+  string id = 1;
+}
+
+// Request message for GetUser
+message GetUserRequest {
+  string id = 1;
+}
+
+message GetUserWithUsernameRequest {
+  string username = 1;
+}
+
+// Request message for GetUser
+message GetListUserRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  optional string search      = 3; // Merged field for name, surname, username
+  optional string sort_by     = 4;  // Field name for sorting
+  optional string order       = 5; // "asc" or "desc"
+}
+
+// Response message for GetUser
+message UserList {
+    repeated User Users = 1;
+}
+
+// Request message for UpdateUser
+message UpdateUserRequest {
+  User User = 1;
+}
+
+// Response message for UpdateUser
+message UpdateUserResponse {
+  bool success = 1;
+}
+
+// Request message for DeleteUser
+message DeleteUserRequest {
+  string id = 1;
+}
+
+// Response message for DeleteUser
+message DeleteUserResponse {
+  bool success = 1;
+}
