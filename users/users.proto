@@ -58,6 +58,7 @@ message GetListUserRequest {
 // Response message for GetUser
 message UserList {
     repeated User Users = 1;
+    int64         count = 2;
 }
 
 // Request message for UpdateUser
