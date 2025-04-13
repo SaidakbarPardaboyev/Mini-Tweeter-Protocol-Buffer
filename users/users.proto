@@ -16,15 +16,16 @@ service UserService {
 
 // User message
 message User {
-  string id            = 1;
-  string name          = 2;
-  string surname       = 3;
-  string bio           = 4;
-  string profile_image = 5;
-  string username      = 6;
-  string password_hash = 7;
-  string created_at    = 8;
-  string updated_at    = 9;
+  string uid           = 1;
+  string id            = 2;
+  string name          = 3;
+  string surname       = 4;
+  string bio           = 5;
+  string profile_image = 6;
+  string username      = 7;
+  string password_hash = 8;
+  string created_at    = 9;
+  string updated_at    = 10;
 }
 
 // Request message for CreateUser

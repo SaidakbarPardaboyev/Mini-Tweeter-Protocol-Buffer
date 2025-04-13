@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option go_package = "genproto/users_service";
+
+package users_service;
+
+import "users.proto";
+
+// Service definition for User
+service FollowingService {
+    rpc Follow(FollowRequest) returns (FollowResponse);
+    rpc UnFollow(UnFollowRequest) returns (UnFollowResponse);
+    rpc GetListFollowings(GetListFollowingRequest) returns (FollowingList);
+    rpc GetListFollowers(GetListFollowerRequest) returns (FollowerList);
+}
+
+message FollowRequest {
+  string follower_id = 1;
+  string following_id = 2;
+}
+
+message FollowResponse {
+  bool success = 1;
+}
+
+message UnFollowRequest {
+  string follower_id = 1;
+  string following_id = 2;
+}
+
+message UnFollowResponse {
+  bool success = 1;
+}
+
+// Request message for GetFollowing
+message GetListFollowingRequest {
+  string id = 1;
+  int32 page = 2;
+  int32 limit = 3;
+  optional string search      = 4; // Merged field for name, surname, Followingname
+}
+
+// Request message for GetFollowing
+message GetListFollowerRequest {
+  string id = 1;
+  int32 page = 2;
+  int32 limit = 3;
+  optional string search      = 4; // Merged field for name, surname, Followingname
+}
+
+// Response message for GetFollowing
+message FollowingList {
+    repeated User Followings = 1;
+    int64         count = 2;
+}
+
+// Response message for GetFollowing
+message FollowerList {
+  repeated User Followers = 1;
+  int64         count = 2;
+}
