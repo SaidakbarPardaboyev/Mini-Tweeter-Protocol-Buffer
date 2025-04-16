@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+option go_package = "genproto/tweets_service";
+
+package tweets_service;
+
+// Service definition for Tweet
+service TweetsService {
+    rpc CreateTweet(CreateTweetRequest) returns (CreateTweetResponse);
+    rpc GetTweet(GetTweetRequest) returns (Tweet);
+    rpc GetListTweet(GetListTweetRequest) returns (TweetList);
+    rpc UpdateTweet(UpdateTweetRequest) returns (UpdateTweetResponse);
+    rpc DeleteTweet(DeleteTweetRequest) returns (DeleteTweetResponse);
+}
+
+// Tweet message
+message Tweet {
+  string id               = 1;
+  string content          = 2;
+  string user_id          = 3;
+  repeated Media medias   = 4;
+  string created_at       = 8;
+  string updated_at       = 9;
+}
+
+message Media {
+  string id          = 1;
+  string tweet_id    = 2;
+  string media_type  = 3;
+  string url         = 4;
+}
+
+// Request message for CreateTweet
+message CreateTweetRequest {
+  Tweet Tweet = 1;
+}
+
+// Response message for CreateTweet
+message CreateTweetResponse {
+  string id = 1;
+}
+
+// Request message for GetTweet
+message GetTweetRequest {
+  string id = 1;
+}
+
+// Request message for GetTweet
+message GetListTweetRequest {
+  int32 page = 1;
+  int32 limit = 2;
+  optional string search      = 3; // Merged field for content
+  optional string sort_by     = 4;  // Field name for sorting
+  optional string order       = 5; // "asc" or "desc"
+}
+
+// Response message for GetTweet
+message TweetList {
+    repeated Tweet Tweets = 1;
+    int64          count = 2;
+}
+
+// Request message for UpdateTweet
+message UpdateTweetRequest {
+  Tweet Tweet = 1;
+}
+
+// Response message for UpdateTweet
+message UpdateTweetResponse {
+  bool success = 1;
+}
+
+// Request message for DeleteTweet
+message DeleteTweetRequest {
+  string id = 1;
+}
+
+// Response message for DeleteTweet
+message DeleteTweetResponse {
+  bool success = 1;
+}
