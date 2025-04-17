@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+option go_package = "genproto/tweets_service";
+
+package tweets_service;
+
+// Service definition for TweetMedia
+service TweetMediasService {
+    rpc CreateTweetMedia(CreateTweetMediaRequest) returns (CreateTweetMediaResponse);
+    rpc GetTweetMedia(GetTweetMediaRequest) returns (TweetMedia);
+    rpc GetListTweetMedia(GetListTweetMediaRequest) returns (TweetMediaList);
+    rpc UpdateTweetMedia(UpdateTweetMediaRequest) returns (UpdateTweetMediaResponse);
+    rpc DeleteTweetMedia(DeleteTweetMediaRequest) returns (DeleteTweetMediaResponse);
+    rpc DeleteTweetMediaWithTweetID(DeleteTweetMediaWithTweetIDRequest) returns (DeleteTweetMediaWithTweetIDResponse);
+}
+
+// TweetMedia message
+message TweetMedia {
+  string id          = 1;
+  string tweet_id    = 2;
+  string media_type  = 3;
+  string url         = 4;
+}
+
+// Request message for CreateTweetMedia
+message CreateTweetMediaRequest {
+  TweetMedia TweetMedia = 1;
+}
+
+// Response message for CreateTweetMedia
+message CreateTweetMediaResponse {
+  string id = 1;
+}
+
+// Request message for GetTweetMedia
+message GetTweetMediaRequest {
+  string id = 1;
+}
+
+// Request message for GetListTweetMediaRequest
+message GetListTweetMediaRequest {
+  string tweet_id = 1;
+}
+
+// Response message for GetTweetMedia
+message TweetMediaList {
+    repeated TweetMedia TweetMedias = 1;
+    int64               count = 2;
+}
+
+// Request message for UpdateTweetMedia
+message UpdateTweetMediaRequest {
+  TweetMedia TweetMedia = 1;
+}
+
+// Response message for UpdateTweetMedia
+message UpdateTweetMediaResponse {
+  bool success = 1;
+}
+
+// Request message for DeleteTweetMedia
+message DeleteTweetMediaRequest {
+  string id = 1;
+}
+
+// Response message for DeleteTweetMedia
+message DeleteTweetMediaResponse {
+  bool success = 1;
+}
+
+// Request message for DeleteTweetMedia
+message DeleteTweetMediaWithTweetIDRequest {
+  string tweet_id = 1;
+}
+
+// Response message for DeleteTweetMedia
+message DeleteTweetMediaWithTweetIDResponse {
+  bool success = 1;
+}

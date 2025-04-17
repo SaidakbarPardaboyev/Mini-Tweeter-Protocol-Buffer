@@ -4,6 +4,8 @@ option go_package = "genproto/tweets_service";
 
 package tweets_service;
 
+import "tweet_medias.proto";
+
 // Service definition for Tweet
 service TweetsService {
     rpc CreateTweet(CreateTweetRequest) returns (CreateTweetResponse);
@@ -15,19 +17,12 @@ service TweetsService {
 
 // Tweet message
 message Tweet {
-  string id               = 1;
-  string content          = 2;
-  string user_id          = 3;
-  repeated Media medias   = 4;
-  string created_at       = 8;
-  string updated_at       = 9;
-}
-
-message Media {
-  string id          = 1;
-  string tweet_id    = 2;
-  string media_type  = 3;
-  string url         = 4;
+  string id                    = 1;
+  string content               = 2;
+  string user_id               = 3;
+  repeated TweetMedia medias   = 4;
+  string created_at            = 8;
+  string updated_at            = 9;
 }
 
 // Request message for CreateTweet
